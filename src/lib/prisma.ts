@@ -1,13 +1,14 @@
-// Mock or simple wrapper for Prisma Client if needed for pure local run without live Postgres running
-export const prisma = {
-  user: {
-    findUnique: async () => null,
-    create: async () => ({ id: '1', email: 'test@example.com', role: 'USER' }),
-  },
-  product: {
-    findUnique: async () => ({ id: '1', name: 'Sample Product', price: 10.0 }),
-  },
-  order: {
-    findMany: async () => [],
-  },
-} as any;
+import pkg from '@prisma/client';
+const { PrismaClient } = pkg as any;
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: any | undefined;
+};
+
+export const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
+  });
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;

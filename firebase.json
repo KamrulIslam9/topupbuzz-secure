@@ -1,0 +1,15 @@
+{
+  "targets": {
+    "myproject": {
+      "app": "myproject",
+      "hosting": {
+        "target": "myproject",
+        "public": ".next",
+        "ignore": [
+          "**/\*.zip",
+          "**/\*.zip/**"
+        ]
+      }
+    }
+  }
+}
