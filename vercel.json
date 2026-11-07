@@ -1,24 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next",
-      "config": { "zeroConfig": true }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/.vercel/functions/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/.next/server/pages/$1"
-    }
-  ],
-  "env": {
-    "NEXT_PUBLIC_BASE_URL": "https://myproject.vercel.app",
-    "NODE_ENV": "production"
-  }
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install"
 }
